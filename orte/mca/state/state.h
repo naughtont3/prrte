@@ -62,6 +62,18 @@ BEGIN_C_DECLS
  */
 ORTE_DECLSPEC extern mca_base_framework_t orte_state_base_framework;
 
+#include <sys/time.h>
+static double _foo_gettimeofday(void)
+{
+    double ret;
+    /* Use gettimeofday() if we opal wasn't initialized */
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    ret = tv.tv_sec;
+    ret += (double)tv.tv_usec / 1000000.0;
+    return ret;
+}
+
 /* For ease in debugging the state machine, it is STRONGLY recommended
  * that the functions be accessed using the following macros
  */
@@ -76,8 +88,9 @@ ORTE_DECLSPEC extern mca_base_framework_t orte_state_base_framework;
     do {                                                                    \
         orte_job_t *shadow=(j);                                             \
         opal_output_verbose(1, orte_state_base_framework.framework_output,  \
-                            "%s ACTIVATE JOB %s STATE %s AT %s:%d",         \
+                            "%s [%f] ACTIVATE JOB %s STATE %s AT %s:%d",         \
                             ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),             \
+                            _foo_gettimeofday(), \
                             (NULL == shadow) ? "NULL" :                     \
                             ORTE_JOBID_PRINT(shadow->jobid),                \
                             orte_job_state_to_str((s)),                     \
@@ -89,8 +102,9 @@ ORTE_DECLSPEC extern mca_base_framework_t orte_state_base_framework;
     do {                                                                    \
         orte_process_name_t *shadow=(p);                                    \
         opal_output_verbose(1, orte_state_base_framework.framework_output,  \
-                            "%s ACTIVATE PROC %s STATE %s AT %s:%d",        \
+                            "%s [%f] ACTIVATE PROC %s STATE %s AT %s:%d",        \
                             ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),             \
+                            _foo_gettimeofday(), \
                             (NULL == shadow) ? "NULL" :                     \
                             ORTE_NAME_PRINT(shadow),                        \
                             orte_proc_state_to_str((s)),                    \
