@@ -62,6 +62,20 @@ BEGIN_C_DECLS
  */
 PRRTE_EXPORT extern prrte_mca_base_framework_t prrte_state_base_framework;
 
+#ifdef HAVE_SYS_TIME_H
+#include <sys/time.h>
+#endif
+static double __myprrte_gettimeofday(void)
+{
+    double ret;
+    /* Use gettimeofday() in case opal not yet initialized */
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    ret = tv.tv_sec;
+    ret += (double)tv.tv_usec / 1000000.0;
+    return ret;
+}
+
 /* For ease in debugging the state machine, it is STRONGLY recommended
  * that the functions be accessed using the following macros
  */
@@ -77,8 +91,9 @@ PRRTE_EXPORT extern prrte_mca_base_framework_t prrte_state_base_framework;
     do {                                                                    \
         prrte_job_t *shadow=(j);                                             \
         prrte_output_verbose(1, prrte_state_base_framework.framework_output,  \
-                            "%s ACTIVATE JOB %s STATE %s AT %s:%d",         \
+                            "%s [%f] ACTIVATE JOB %s STATE %s AT %s:%d",         \
                             PRRTE_NAME_PRINT(PRRTE_PROC_MY_NAME),             \
+                            __myprrte_gettimeofday(), \
                             (NULL == shadow) ? "NULL" :                     \
                             PRRTE_JOBID_PRINT(shadow->jobid),                \
                             prrte_job_state_to_str((s)),                     \
@@ -90,8 +105,9 @@ PRRTE_EXPORT extern prrte_mca_base_framework_t prrte_state_base_framework;
     do {                                                                    \
         prrte_process_name_t *shadow=(p);                                    \
         prrte_output_verbose(1, prrte_state_base_framework.framework_output,  \
-                            "%s ACTIVATE PROC %s STATE %s AT %s:%d",        \
+                            "%s [%f] ACTIVATE PROC %s STATE %s AT %s:%d",        \
                             PRRTE_NAME_PRINT(PRRTE_PROC_MY_NAME),             \
+                            __myprrte_gettimeofday(), \
                             (NULL == shadow) ? "NULL" :                     \
                             PRRTE_NAME_PRINT(shadow),                        \
                             prrte_proc_state_to_str((s)),                    \
