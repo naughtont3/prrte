@@ -30,7 +30,8 @@ SUBDIRS += \
 	tools/pcc \
     tools/prte_info \
     tools/prte \
-    tools/pterm
+    tools/pterm \
+    tools/pjobs
 
 DIST_SUBDIRS += \
 	tools/prted \
@@ -38,4 +39,5 @@ DIST_SUBDIRS += \
 	tools/pcc \
     tools/prte_info \
     tools/prte \
-    tools/pterm
+    tools/pterm \
+    tools/pjobs
