@@ -4,6 +4,7 @@
 # Copyright (c) 2016-2020 Intel, Inc.  All rights reserved.
 # Copyright (c) 2019      Research Organization for Information Science
 #                         and Technology (RIST).  All rights reserved.
+# Copyright (c) 2020      UT-Battelle, LLC.  All rights Reserved.
 # $COPYRIGHT$
 #
 # Additional copyrights may follow
@@ -29,5 +30,6 @@ AC_DEFUN([PRTE_CONFIG_FILES],[
         src/tools/prte_info/Makefile
         src/tools/prte/Makefile
         src/tools/pterm/Makefile
+        src/tools/pjobs/Makefile
     ])
 ])
