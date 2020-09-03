@@ -728,8 +728,8 @@ static void dvm_notify(int sd, short args, void *cbdata)
     if (prte_get_attribute(&jdata->attributes, PRTE_JOB_ABORTED_PROC, (void**)&pptr, PRTE_PTR) && NULL != pptr) {
         rc = jdata->exit_code;
     /* or whether we got cancelled by the user */
-    } else if (prte_get_attribute(&jdata->attributes, PRTE_JOB_CANCELLED, NULL, PRTE_BOOL)) {
-        rc = PRTE_ERR_JOB_CANCELLED;
+    } else if (prte_get_attribute(&jdata->attributes, PRTE_ERR_JOB_CANCELED, NULL, PRTE_BOOL)) {
+        rc = PRTE_ERR_JOB_CANCELED;
     } else {
         rc = jdata->exit_code;
     }

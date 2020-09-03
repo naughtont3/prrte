@@ -164,7 +164,7 @@ enum {
     PRTE_ERR_DUPLICATE_MSG                  = (PRTE_ERR_SPLIT - 47),
     PRTE_ERR_OUT_OF_ORDER_MSG               = (PRTE_ERR_SPLIT - 48),
     PRTE_ERR_FORCE_SELECT                   = (PRTE_ERR_SPLIT - 49),
-    PRTE_ERR_JOB_CANCELLED                  = (PRTE_ERR_SPLIT - 50),
+    PRTE_ERR_JOB_CANCELED                   = (PRTE_ERR_SPLIT - 50),
     PRTE_ERR_CONDUIT_SEND_FAIL              = (PRTE_ERR_SPLIT - 51)
 };
 

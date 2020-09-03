@@ -400,7 +400,7 @@ prte_strerror(int errnum)
     case PRTE_ERR_FORCE_SELECT:
         retval = "Force select";
         break;
-    case PRTE_ERR_JOB_CANCELLED:
+    case PRTE_ERR_JOB_CANCELED:
         retval = "Job cancelled";
         break;
     case PRTE_ERR_CONDUIT_SEND_FAIL:

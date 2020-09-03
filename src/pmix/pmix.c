@@ -152,8 +152,8 @@ pmix_status_t prte_pmix_convert_rc(int rc)
     case PRTE_ERR_FAILED_TO_MAP:
         return PMIX_ERR_JOB_FAILED_TO_MAP;
 
-    case PRTE_ERR_JOB_CANCELLED:
-        return PMIX_ERR_JOB_CANCELLED;
+    case PRTE_ERR_JOB_CANCELED:
+        return PMIX_ERR_JOB_CANCELED;
 #endif
 
     case PRTE_ERR_DEBUGGER_RELEASE:
@@ -432,19 +432,22 @@ pmix_status_t prte_pmix_convert_job_state_to_error(int state)
             return PMIX_ERR_JOB_FAILED_TO_MAP;
 
         case PRTE_JOB_STATE_NEVER_LAUNCHED:
-            return PMIX_ERR_JOB_NEVER_LAUNCHED;
+            //return PMIX_ERR_JOB_NEVER_LAUNCHED; // TJN
+            return PMIX_ERR_JOB_FAILED_TO_LAUNCH;
 
         case PRTE_JOB_STATE_FAILED_TO_LAUNCH:
             return PMIX_ERR_JOB_FAILED_TO_LAUNCH;
 
         case PRTE_JOB_STATE_FAILED_TO_START:
-            return PMIX_ERR_JOB_FAILED_TO_START;
+            //return PMIX_ERR_JOB_FAILED_TO_START; // TJN
+            return PMIX_ERR_JOB_FAILED_TO_LAUNCH;
 
         case PRTE_JOB_STATE_CANNOT_LAUNCH:
-            return PMIX_ERR_JOB_CANNOT_LAUNCH;
+            //return PMIX_ERR_JOB_CANNOT_LAUNCH;   // TJN
+            return PMIX_ERR_JOB_FAILED_TO_LAUNCH;
 
         case PRTE_JOB_STATE_KILLED_BY_CMD:
-            return PMIX_ERR_JOB_CANCELLED;
+            return PMIX_ERR_JOB_CANCELED;
 
         case PRTE_JOB_STATE_ABORTED:
         case PRTE_JOB_STATE_CALLED_ABORT:
