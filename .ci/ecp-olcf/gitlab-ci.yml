@@ -174,7 +174,8 @@ test-gpfs:
     - cd ${BUILD_DIR}/source/examples
     #- "jsrun -n1 hostname"
     #- ldd ./hello_c
-    - PRTERUN_ARGS="--hostfile $LSB_DJOB_HOSTFILE --np 20 --map-by node:NOLOCAL --bind-to core"
+    #- PRTERUN_ARGS="--hostfile $LSB_DJOB_HOSTFILE --np 20 --map-by node:NOLOCAL --bind-to core"
+    - PRTERUN_ARGS="--hostfile $LSB_DJOB_HOSTFILE --np 1 --map-by node:NOLOCAL --bind-to core"
     - prterun $PRTERUN_ARGS hostname
     - echo "NOTE - End GPFS test script"
   after_script:
