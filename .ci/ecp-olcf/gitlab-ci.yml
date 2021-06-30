@@ -176,8 +176,7 @@ test-gpfs:
     #- ldd ./hello_c
     #- PRTERUN_ARGS="--hostfile $LSB_DJOB_HOSTFILE --np 20 --map-by node:NOLOCAL --bind-to core"
     - PRTERUN_ARGS="--hostfile $LSB_DJOB_HOSTFILE --np 1 --map-by node:NOLOCAL --bind-to core"
-      # - prterun $PRTERUN_ARGS hostname
-    - prterun -x LD_LIBRARY_PATH --hostfile ${LSB_DJOB_HOSTFILE} --np 1 --map-by node:NOLOCAL --bind-to core hostname
+      - prterun $PRTERUN_ARGS hostname
     - echo "NOTE - End GPFS test script"
   after_script:
     # clean up directory
